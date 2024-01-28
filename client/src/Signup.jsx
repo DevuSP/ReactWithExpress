@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";  // used to navigate to other pages or url.
 
 function Signup() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
     const handleClick = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('', {name, email, password});
-            console.log(`Response: ${response}.`);
+            const response = await axios.post("http://localhost:3000/register", {name, email, password});
+            console.log(response);
+            navigate("/login");  // navigate to login page as soon as above is done.
         } catch (error) {
-            console.log(`Error: ${error}.`);
+            console.log(error);
         }
     }
 
